@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+set ip [lindex $argv 0]
+set username YOUR_USERNAME
+set passwd Your_PASSWORD
+set passwd2 Your_ENABLE_PASSWORD
+eval spawn ssh -l $username $ip
+expect "assword:"   {send "$passwd\n"}
+expect ">"   {send "ena\n"}
+expect "Password:"   {send "$passwd2\n"}
+expect "#"   {send "terminal length 0\n"}
+expect "#"   {send "show running-config\n"}
+expect "#"   {send "exit\n"}
